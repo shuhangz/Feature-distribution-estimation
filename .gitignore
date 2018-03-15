@@ -1,5 +1,6 @@
 image/
 svm_data/
+.idea/
 *.csv
 
 # Byte-compiled / optimized / DLL files

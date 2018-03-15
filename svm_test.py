@@ -33,7 +33,7 @@ from sklearn.externals import joblib
 # joblib.dump(svc, 'ssvvc.pkl')
 clf = joblib.load('./svm_data/classifier.pkl')
 print(clf)
-f = open('./svm_data/svm_training_10gsd_rgb_resample.tif.pkl','rb')
+f = open('./svm_data/svm_training_GE_river1_clip.png.pkl','rb')
 data = pickle.load(f)
 # standarize data
 data = preprocessing.scale(data)
