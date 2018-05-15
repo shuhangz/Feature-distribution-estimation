@@ -42,8 +42,8 @@ def read_rgb(image, x, y):
 # rgb file for generating svm training data
 # filename = './image/haimen_10_rgb.tif'
 # filename = './image/chenshan_10_rgb.tif'
-filename = './image/river1_clip.png'
-tag = "GE_"
+filename = './image/jinhai/l17_a1.tif'
+tag = "JH_"
 
 
 
@@ -52,7 +52,7 @@ img_color = img.copy()
 read_world_file(filename)
 img= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 # sift = cv2.xfeatures2d.SIFT_create()
-sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=1, sigma=0.5, contrastThreshold=0.02, edgeThreshold=5) # modified for downsampling mostly ok
+sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=1, sigma=.6, contrastThreshold=0.04, edgeThreshold=12) # modified for downsampling mostly ok
 # sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=1, sigma=0.5, contrastThreshold=0.02, edgeThreshold=8)
 kp,des = sift.detectAndCompute(img,None)
 print('===image size==')
@@ -81,24 +81,24 @@ for point,descriptor in zip(kp,des):
     index.append(temp)
     point_id += 1
 
-# # standarize data
-# # svm_train_array = preprocessing.scale(svm_train_array)
-# # write training data to file
-# output = open("./svm_data/svm_training_"+tag+os.path.basename(filename)+".pkl", "wb")
-# pickle.dump(svm_train_array, output)
-# print("write svm train data"+"./svm_data/svm_training_"+tag+os.path.basename(filename)+".pkl")
-# output.close()
-#
-# # use svm classifier
-# from sklearn.externals import joblib
-#
-# # load classifier
-# clf = joblib.load('./svm_data/classifier.pkl')
-# print(clf)
-#
-# data = preprocessing.scale(svm_train_array)
-# print(np.size(data[0]))
-# pd = clf.predict(data)
+# standarize data
+# svm_train_array = preprocessing.scale(svm_train_array)
+# write training data to file
+output = open("./svm_data/svm_training_"+tag+os.path.basename(filename)+".pkl", "wb")
+pickle.dump(svm_train_array, output)
+print("write svm train data"+"./svm_data/svm_training_"+tag+os.path.basename(filename)+".pkl")
+output.close()
+
+# use svm classifier
+from sklearn.externals import joblib
+
+# load classifier
+clf = joblib.load('./svm_data/classifier.pkl')
+print(clf)
+
+data = preprocessing.scale(svm_train_array)
+print(np.size(data[0]))
+pd = clf.predict(data)
 # f_pd = open("./svm_data/svm_result_"+tag+os.path.basename(filename)+".pkl", "wb")
 # pickle.dump(pd, f_pd)
 # print("classified:"+str(np.size(pd)))
@@ -106,11 +106,11 @@ for point,descriptor in zip(kp,des):
 #
 # print("svm_success")
 # # np.savetxt('./svm_data/result.csv', output, delimiter = ',')
-
-
-
-f_pd_read = open("./svm_data/svm_result_"+tag+os.path.basename(filename)+".pkl", "rb")
-pd = pickle.load(f_pd_read)
+#
+#
+#
+# f_pd_read = open("./svm_data/svm_result_"+tag+os.path.basename(filename)+".pkl", "rb")
+# pd = pickle.load(f_pd_read)
 # change the coord to world
 Xcellsize,Ycellsize, upperleft_X, upperleft_Y = read_world_file(filename)
 

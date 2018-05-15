@@ -11,3 +11,7 @@ filename设置成影像文件名称
 
 文件组织：x,y,size,angle,response,octave,point_id,is_keypoint
 
+##ArcGIS
+Add XY data -> csv文件
+添加'x''y' 字段，导出dbf格式。
+
