@@ -42,8 +42,9 @@ def read_rgb(image, x, y):
 # rgb file for generating svm training data
 # filename = './image/haimen_10_rgb.tif'
 # filename = './image/chenshan_10_rgb.tif'
-filename = './image/jinhai/l17_a1.tif'
-tag = "JH_"
+# filename = './image/simulation/utah_area.tif'
+filename = './image/meilan/l17_clip.tif'
+tag = "MEILAN_"
 
 
 
@@ -52,8 +53,10 @@ img_color = img.copy()
 read_world_file(filename)
 img= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 # sift = cv2.xfeatures2d.SIFT_create()
-sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=1, sigma=.6, contrastThreshold=0.04, edgeThreshold=12) # modified for downsampling mostly ok
-# sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=1, sigma=0.5, contrastThreshold=0.02, edgeThreshold=8)
+sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=4, sigma=1, contrastThreshold=0.04, edgeThreshold=12) # modified for downsampling mostly ok
+# sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=2, sigma=3, contrastThreshold=0.04, edgeThreshold=12) # meilan lake
+# sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=3, sigma=3, contrastThreshold=0.04, edgeThreshold=15) # for simulation
+
 kp,des = sift.detectAndCompute(img,None)
 print('===image size==')
 print(np.size(img,0))

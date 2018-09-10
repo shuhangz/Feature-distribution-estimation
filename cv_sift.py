@@ -39,8 +39,10 @@ def read_world_file(filename):
 # filename = './image/xm_ortho2.tif'
 # filename = './image/Clip.tif'
 # filename = './image/haimen_ori.png'
-filename = './image/jinhai/l17_a1.tif'
-tag = "JH_"
+# filename = './image/jinhai/l17_a1.tif'
+# filename = './image/simulation/utah_area.tif'
+filename = './image/meilan/l17_clip.tif'
+tag = "MEILAN_"
 
 # rgb file for gerenate svm training data
 
@@ -49,7 +51,7 @@ img = cv2.imread(filename)
 read_world_file(filename)
 img= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 # sift = cv2.xfeatures2d.SIFT_create()
-sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=1, sigma=.6, contrastThreshold=0.04, edgeThreshold=12) # modified for downsampling mostly ok4
+sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=4, sigma=1, contrastThreshold=0.04, edgeThreshold=12) # modified for downsampling mostly ok4
 # sift = cv2.xfeatures2d.SIFT_create(nOctaveLayers=1, sigma=0.5, contrastThreshold=0.02, edgeThreshold=8)
 kp = sift.detect(img,None)
 print(len(kp))
